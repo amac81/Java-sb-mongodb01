@@ -1,4 +1,4 @@
-# Game Collection System
+# Restful API with Spring Boot, MondoDB
 
 Project developed in the course Java COMPLETO 2023 Object Oriented Programming +Projects.
 
