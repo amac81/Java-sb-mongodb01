@@ -5,31 +5,34 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document //optional (collection = "user")
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	
 	@Id
-	private String id;
+	@MongoId
+	private String myId;
 	private String name;
 	private String email;
 
 	public User() {
 	}
 
-	public User(String id, String name, String email) {
-		this.id = id;
+	public User(String myId, String name, String email) {
+		this.myId = myId;
 		this.name = name;
 		this.email = email;
 	}
 
-	public String getId() {
-		return id;
+	public String getMyId() {
+		return myId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMyId(String myId) {
+		this.myId = myId;
 	}
 
 	public String getName() {
@@ -50,7 +53,7 @@ public class User implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(myId);
 	}
 
 	@Override
@@ -62,7 +65,12 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(myId, other.myId);
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + myId + ", name=" + name + ", email=" + email + "]";
 	}
 
 }
