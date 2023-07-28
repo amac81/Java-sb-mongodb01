@@ -15,14 +15,16 @@ public class Comment implements Serializable {
 	private String id;
 	private String text;
 	private Instant moment;
+	private User author;
 
 	public Comment() {
 	}
 
-	public Comment(String id, String text, Instant moment) {
+	public Comment(String id, String text, Instant moment, User author) {
 		this.id = id;
 		this.text = text;
 		this.moment = moment;
+		this.author = author;
 	}
 
 	public String getId() {
@@ -47,6 +49,14 @@ public class Comment implements Serializable {
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 	@Override

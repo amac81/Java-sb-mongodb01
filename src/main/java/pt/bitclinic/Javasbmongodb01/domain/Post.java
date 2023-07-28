@@ -16,15 +16,17 @@ public class Post implements Serializable {
 	private Instant moment;
 	private String title;
 	private String body;
+	private User author;
 
 	public Post() {
 	}
 
-	public Post(String id, Instant moment, String title, String body) {
+	public Post(String id, Instant moment, String title, String body, User author) {
 		this.id = id;
 		this.moment = moment;
 		this.title = title;
 		this.body = body;
+		this.author = author;
 	}
 
 	public String getId() {
@@ -57,6 +59,14 @@ public class Post implements Serializable {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 	@Override
