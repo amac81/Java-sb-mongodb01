@@ -60,7 +60,7 @@ public class TestConfig implements CommandLineRunner { // to run when program st
 		Post post3 = new Post("p003", Instant.parse("2023-07-26T08:45:00Z"), "The Benefits of Meditation",
 				"Meditation has been shown to have numerous benefits for both physical and mental health. "
 						+ "Regular meditation practice can reduce stress, improve focus, and promote overall well-being.",
-				new AuthorDTO(user2));
+				new AuthorDTO(user1));
 
 		Post post4 = new Post("p004", Instant.parse("2023-07-25T17:20:00Z"), "Delicious and Healthy Recipes",
 				"Eating healthy doesn't mean sacrificing flavor. Try these delicious recipes that are not only "
@@ -68,6 +68,11 @@ public class TestConfig implements CommandLineRunner { // to run when program st
 				new AuthorDTO(user5));
 
 		postRepository.saveAll(Arrays.asList(post1, post2, post3, post4));
+		
+		
+		user1.getPosts().addAll(Arrays.asList(post1, post3));
+		userRepository.save(user1);
+
 
 		// clean Collection
 		commentRepository.deleteAll();
