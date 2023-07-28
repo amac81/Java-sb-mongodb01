@@ -1,27 +1,30 @@
 package pt.bitclinic.Javasbmongodb01.domain;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document //optional (collection = "user")
-public class User implements Serializable{
+@Document
+public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
-	private String name;
-	private String email;
+	private Instant moment;
+	private String title;
+	private String body;
 
-	public User() {
+	public Post() {
 	}
 
-	public User(String id, String name, String email) {
+	public Post(String id, Instant moment, String title, String body) {
 		this.id = id;
-		this.name = name;
-		this.email = email;
+		this.moment = moment;
+		this.title = title;
+		this.body = body;
 	}
 
 	public String getId() {
@@ -32,20 +35,28 @@ public class User implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Instant getMoment() {
+		return moment;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMoment(Instant moment) {
+		this.moment = moment;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
 	}
 
 	@Override
@@ -61,13 +72,8 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Post other = (Post) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + "]";
 	}
 
 }

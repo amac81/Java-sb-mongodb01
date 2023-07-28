@@ -1,27 +1,28 @@
 package pt.bitclinic.Javasbmongodb01.domain;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document //optional (collection = "user")
-public class User implements Serializable{
+@Document
+public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
-	private String name;
-	private String email;
+	private String text;
+	private Instant moment;
 
-	public User() {
+	public Comment() {
 	}
 
-	public User(String id, String name, String email) {
+	public Comment(String id, String text, Instant moment) {
 		this.id = id;
-		this.name = name;
-		this.email = email;
+		this.text = text;
+		this.moment = moment;
 	}
 
 	public String getId() {
@@ -32,20 +33,20 @@ public class User implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getText() {
+		return text;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setText(String text) {
+		this.text = text;
 	}
 
-	public String getEmail() {
-		return email;
+	public Instant getMoment() {
+		return moment;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMoment(Instant moment) {
+		this.moment = moment;
 	}
 
 	@Override
@@ -61,13 +62,8 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Comment other = (Comment) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + "]";
 	}
 
 }
