@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pt.bitclinic.Javasbmongodb01.domain.User;
+import pt.bitclinic.Javasbmongodb01.dto.UserDTO;
 import pt.bitclinic.Javasbmongodb01.repositories.UserRepository;
 import pt.bitclinic.Javasbmongodb01.services.exceptions.ObjectNotFoundException;
 
@@ -29,6 +30,10 @@ public class UserService {
 	}
 	
 	public User insert(User obj) {
-		return userRepository.save(obj);
+		return userRepository.insert(obj);
+	}
+	
+	public User fromDTO(UserDTO userDto) {
+		return new User(userDto.getId(), userDto.getName(), userDto.getEmail());
 	}
 }

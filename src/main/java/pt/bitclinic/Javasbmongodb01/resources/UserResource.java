@@ -41,11 +41,12 @@ public class UserResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> insert(@RequestBody User obj) {
-		obj = userService.insert(obj);
+	public ResponseEntity<User> insert(@RequestBody UserDTO obj) {
+		User user = userService.fromDTO(obj);
+		user = userService.insert(user);
 		// to generate the correct HTTP response code 201 - Created
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{id}").buildAndExpand(obj.getMyId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{id}").buildAndExpand(user.getMyId())
 				.toUri();
-		return ResponseEntity.created(uri).body(obj);
+		return ResponseEntity.created(uri).body(user);
 	}
 }
