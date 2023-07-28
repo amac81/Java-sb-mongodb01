@@ -1,5 +1,7 @@
 package pt.bitclinic.Javasbmongodb01.services;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,16 @@ public class PostService {
 	//	List<Post> foundPosts = postRepository.findByTitleContainingIgnoreCase(text);
 		
 		List<Post> foundPosts = postRepository.searchTitle(text);
+
+		return foundPosts;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Post> fullSearch(String text, Instant minMoment, Instant maxMoment) {
+		
+		maxMoment = maxMoment.plus(24, ChronoUnit.HOURS);
+		
+		List<Post> foundPosts = postRepository.fullSearch(text, minMoment, maxMoment);
 
 		return foundPosts;
 	}

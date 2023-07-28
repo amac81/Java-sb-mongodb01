@@ -1,4 +1,5 @@
 package pt.bitclinic.Javasbmongodb01.resources;
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,20 @@ public class PostResource {
 		text = URL.decodeParam(text);
 		
 		List<Post> posts = postService.findByTitle(text);
+		return ResponseEntity.ok().body(posts);
+	}
+	
+	@GetMapping(value = "/fullsearch")
+	public ResponseEntity<List<Post>> fullSearch(
+			@RequestParam(value = "text", defaultValue = "") String text,
+			@RequestParam(value = "minDate", defaultValue = "") String minDate,
+			@RequestParam(value = "maxDate", defaultValue = "") String maxDate) {
+		
+		text = URL.decodeParam(text);
+		Instant min = URL.convertData(minDate, Instant.parse("1900-01-01T00:00:00.000+00:00"));
+		Instant max = URL.convertData(maxDate, Instant.now());
+		
+		List<Post> posts = postService.fullSearch(text, min, max);
 		return ResponseEntity.ok().body(posts);
 	}
 
