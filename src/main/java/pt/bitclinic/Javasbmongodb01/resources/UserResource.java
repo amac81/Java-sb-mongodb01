@@ -2,6 +2,7 @@ package pt.bitclinic.Javasbmongodb01.resources;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import pt.bitclinic.Javasbmongodb01.domain.User;
+import pt.bitclinic.Javasbmongodb01.dto.UserDTO;
 import pt.bitclinic.Javasbmongodb01.services.UserService;
 
 @RestController
@@ -23,10 +25,12 @@ public class UserResource {
 	private UserService service;
 
 	@GetMapping // or @RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<User>> findAll() {
+	public ResponseEntity<List<UserDTO>> findAll() {
 		List <User> users = new ArrayList<> ();
 		users = service.findAll();
-		return ResponseEntity.ok().body(users);
+		List <UserDTO> usersDto = users.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(usersDto);
 	}
 	
 	@PostMapping
