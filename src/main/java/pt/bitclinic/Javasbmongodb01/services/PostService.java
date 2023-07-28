@@ -26,7 +26,10 @@ public class PostService {
 	
 	@Transactional(readOnly = true)
 	public List<Post> findByTitle(String text) {
-		List<Post> foundPosts = postRepository.findByTitleContainingIgnoreCase(text);
+	//	List<Post> foundPosts = postRepository.findByTitleContainingIgnoreCase(text);
+		
+		List<Post> foundPosts = postRepository.searchTitle(text);
+
 		return foundPosts;
 	}
 

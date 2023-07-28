@@ -3,6 +3,7 @@ package pt.bitclinic.Javasbmongodb01.repositories;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 import pt.bitclinic.Javasbmongodb01.domain.Post;
 
@@ -11,8 +12,13 @@ import pt.bitclinic.Javasbmongodb01.domain.Post;
 
 public interface PostRepository extends MongoRepository<Post, String> {	
 	
+	//https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+	@Query("{ title: { $regex: ?0, $options: 'i' } }")
+	List<Post> searchTitle(String text);
+	
 	//using Query Methods
 	//https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.custom-implementations
 	List<Post> findByTitleContainingIgnoreCase(String text);
+	
 }
 
