@@ -10,11 +10,12 @@ public class UserDTO implements Serializable {
 	private String id;
 	private String name;
 	private String email;
-	
-	public UserDTO() {}
-	
+
+	public UserDTO() {
+	}
+
 	public UserDTO(User user) {
-		id = user.getMyId();
+		id = user.getId();
 		name = user.getName();
 		email = user.getEmail();
 	}
@@ -42,7 +43,5 @@ public class UserDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 
 }

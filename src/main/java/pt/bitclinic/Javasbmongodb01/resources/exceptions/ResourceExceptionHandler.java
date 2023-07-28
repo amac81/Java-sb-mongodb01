@@ -17,16 +17,14 @@ public class ResourceExceptionHandler {
 	// this method will intercept exceptions of type ResourceNotFoundException and
 	// handle them
 	@ExceptionHandler(ObjectNotFoundException.class)
-	public ResponseEntity<StandardError> resourceNotFound(ObjectNotFoundException e, HttpServletRequest request) {
-		String error = "Resource not found";
+	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
+		String error = "Object not found";
 		HttpStatus status = HttpStatus.NOT_FOUND;
 
 		StandardError errorBody = new StandardError(Instant.now(), status.value(), error, e.getMessage(),
 				request.getRequestURI());
 		return ResponseEntity.status(status).body(errorBody);
-
 	}
-	
 	
 	// this method will intercept exceptions of type DatabaseException and
 	// handle them

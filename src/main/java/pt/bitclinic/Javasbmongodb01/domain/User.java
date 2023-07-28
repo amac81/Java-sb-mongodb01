@@ -14,25 +14,25 @@ public class User implements Serializable{
 	
 	@Id
 	@MongoId
-	private String myId;
+	private String id;
 	private String name;
 	private String email;
 
 	public User() {
 	}
 
-	public User(String myId, String name, String email) {
-		this.myId = myId;
+	public User(String id, String name, String email) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 	}
 
-	public String getMyId() {
-		return myId;
+	public String getId() {
+		return id;
 	}
 
-	public void setMyId(String myId) {
-		this.myId = myId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -53,7 +53,7 @@ public class User implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(myId);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -65,12 +65,12 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(myId, other.myId);
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + myId + ", name=" + name + ", email=" + email + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + "]";
 	}
 
 }

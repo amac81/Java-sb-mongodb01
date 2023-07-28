@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,8 +46,17 @@ public class UserResource {
 		User user = userService.fromDTO(obj);
 		user = userService.insert(user);
 		// to generate the correct HTTP response code 201 - Created
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{id}").buildAndExpand(user.getMyId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{id}").buildAndExpand(user.getId())
 				.toUri();
 		return ResponseEntity.created(uri).body(user);
 	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+		userService.delete(id);
+		// generate HTTP response code 204 - No Content
+		return ResponseEntity.noContent().build();
+	}
+	
+	
 }
