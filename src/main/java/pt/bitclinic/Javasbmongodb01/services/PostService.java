@@ -1,5 +1,6 @@
 package pt.bitclinic.Javasbmongodb01.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,11 @@ public class PostService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Post " + id + " not found."));
 	}
 
+	
+	@Transactional(readOnly = true)
+	public List<Post> findByTitle(String text) {
+		List<Post> foundPosts = postRepository.findByTitleContainingIgnoreCase(text);
+		return foundPosts;
+	}
 
 }
