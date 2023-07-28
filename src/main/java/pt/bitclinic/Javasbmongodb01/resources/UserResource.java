@@ -1,30 +1,40 @@
 package pt.bitclinic.Javasbmongodb01.resources;
+import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import pt.bitclinic.Javasbmongodb01.domain.User;
+import pt.bitclinic.Javasbmongodb01.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
 	
+	@Autowired
+	private UserService service;
 
 	@GetMapping // or @RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<User>> findAll() {
-		User user1 = new User("1", "Mary Jane", "mary@gmail.com");
-		User user2 = new User("2", "Bob Brown", "bob@gmail.com");
-		User user3 = new User("3", "Chris Charlie", "chris@gmail.com");
-		User user4 = new User("4", "Louis Bee", "louis@gmail.com");
-
-		List <User> users = new ArrayList<> ();	
-		users.addAll(Arrays.asList(user1, user2, user3, user4));
-		
+		List <User> users = new ArrayList<> ();
+		users = service.findAll();
 		return ResponseEntity.ok().body(users);
+	}
+	
+	@PostMapping
+	public ResponseEntity<User> insert(@RequestBody User obj) {
+		obj = service.insert(obj);
+		// to generate the correct HTTP response code 201 - Created
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{id}").buildAndExpand(obj.getId())
+				.toUri();
+		return ResponseEntity.created(uri).body(obj);
 	}
 }
