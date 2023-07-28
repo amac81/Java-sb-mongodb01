@@ -8,11 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import pt.bitclinic.Javasbmongodb01.domain.Comment;
 import pt.bitclinic.Javasbmongodb01.domain.Post;
 import pt.bitclinic.Javasbmongodb01.domain.User;
 import pt.bitclinic.Javasbmongodb01.dto.AuthorDTO;
-import pt.bitclinic.Javasbmongodb01.repositories.CommentRepository;
+import pt.bitclinic.Javasbmongodb01.dto.CommentDTO;
 import pt.bitclinic.Javasbmongodb01.repositories.PostRepository;
 import pt.bitclinic.Javasbmongodb01.repositories.UserRepository;
 
@@ -27,8 +26,6 @@ public class TestConfig implements CommandLineRunner { // to run when program st
 	@Autowired
 	private PostRepository postRepository;
 
-	@Autowired
-	private CommentRepository commentRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -68,46 +65,47 @@ public class TestConfig implements CommandLineRunner { // to run when program st
 				new AuthorDTO(user5));
 
 		postRepository.saveAll(Arrays.asList(post1, post2, post3, post4));
-		
-		
+
 		user1.getPosts().addAll(Arrays.asList(post1, post3));
 		userRepository.save(user1);
 
 
-		// clean Collection
-		commentRepository.deleteAll();
+		CommentDTO c1 = new CommentDTO("Great post! I found the information about AI fascinating.",
+				Instant.parse("2023-07-28T11:30:00Z"), new AuthorDTO(user2));
 
-		Comment c1 = new Comment(null, "Great post! I found the information about AI fascinating.",
-				Instant.parse("2023-07-28T11:30:00Z"), user2);
+		CommentDTO c2 = new CommentDTO("I've always been interested in space exploration. Exciting times ahead!",
+				Instant.parse("2023-07-27T16:15:00Z"), new AuthorDTO(user4));
 
-		Comment c2 = new Comment(null, "I've always been interested in space exploration. Exciting times ahead!",
-				Instant.parse("2023-07-27T16:15:00Z"), user4);
+		CommentDTO c3 = new CommentDTO("Meditation has changed my life. It's so beneficial for reducing stress.",
+				Instant.parse("2023-07-26T09:20:00Z"), new AuthorDTO(user3));
 
-		Comment c3 = new Comment(null, "Meditation has changed my life. It's so beneficial for reducing stress.",
-				Instant.parse("2023-07-26T09:20:00Z"), user3);
+		CommentDTO c4 = new CommentDTO("I can't wait to try these healthy recipes. They sound delicious!",
+				Instant.parse("2023-07-25T18:00:00Z"), new AuthorDTO(user6));
 
-		Comment c4 = new Comment(null, "I can't wait to try these healthy recipes. They sound delicious!",
-				Instant.parse("2023-07-25T18:00:00Z"), user6);
+		CommentDTO c5 = new CommentDTO("Is there any specific programming language that's best for AI development?",
+				Instant.parse("2023-07-28T12:00:00Z"), new AuthorDTO(user1));
 
-		Comment c5 = new Comment(null, "Is there any specific programming language that's best for AI development?",
-				Instant.parse("2023-07-28T12:00:00Z"), user1);
+		CommentDTO c6 = new CommentDTO("The possibility of exploring other planets is mind-blowing!",
+				Instant.parse("2023-07-27T17:30:00Z"), new AuthorDTO(user4));
 
-		Comment c6 = new Comment(null, "The possibility of exploring other planets is mind-blowing!",
-				Instant.parse("2023-07-27T17:30:00Z"), user4);
+		CommentDTO c7 = new CommentDTO("I've been meditating for a year now, and it's been a game-changer.",
+				Instant.parse("2023-07-26T09:45:00Z"), new AuthorDTO(user5));
 
-		Comment c7 = new Comment(null, "I've been meditating for a year now, and it's been a game-changer.",
-				Instant.parse("2023-07-26T09:45:00Z"), user5);
+		CommentDTO c8 = new CommentDTO("I'm always looking for healthy recipes. Thanks for sharing!",
+				Instant.parse("2023-07-25T18:30:00Z"), new AuthorDTO(user2));
 
-		Comment c8 = new Comment(null, "I'm always looking for healthy recipes. Thanks for sharing!",
-				Instant.parse("2023-07-25T18:30:00Z"), user2);
+		CommentDTO c9 = new CommentDTO("AI ethics is a critical topic. We need to discuss its implications.",
+				Instant.parse("2023-07-28T13:20:00Z"), new AuthorDTO(user3));
 
-		Comment c9 = new Comment(null, "AI ethics is a critical topic. We need to discuss its implications.",
-				Instant.parse("2023-07-28T13:20:00Z"), user3);
+		CommentDTO c10 = new CommentDTO("Space travel will redefine our understanding of the universe.",
+				Instant.parse("2023-07-27T18:45:00Z"), new AuthorDTO(user1));
 
-		Comment c10 = new Comment(null, "Space travel will redefine our understanding of the universe.",
-				Instant.parse("2023-07-27T18:45:00Z"), user1);
-
-		commentRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10));
+		post1.getComments().addAll(Arrays.asList(c1, c9, c5));
+		post3.getComments().addAll(Arrays.asList(c7, c3));
+		post2.getComments().addAll(Arrays.asList(c2, c6, c10));
+		post4.getComments().addAll(Arrays.asList(c4, c8));
+		
+		postRepository.saveAll(Arrays.asList(post1, post2, post3, post4));
 
 	}
 
