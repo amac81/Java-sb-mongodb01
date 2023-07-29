@@ -1,4 +1,5 @@
 package pt.bitclinic.Javasbmongodb01.resources;
+
 import java.time.Instant;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import pt.bitclinic.Javasbmongodb01.services.PostService;
 @RestController
 @RequestMapping(value = "/posts")
 public class PostResource {
-	
+
 	@Autowired
 	private PostService postService;
 
@@ -26,25 +27,24 @@ public class PostResource {
 		Post post = postService.findById(id);
 		return ResponseEntity.ok().body(post);
 	}
-	
+
 	@GetMapping(value = "/titlesearch")
 	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
 		text = URL.decodeParam(text);
-		
+
 		List<Post> posts = postService.findByTitle(text);
 		return ResponseEntity.ok().body(posts);
 	}
-	
+
 	@GetMapping(value = "/fullsearch")
-	public ResponseEntity<List<Post>> fullSearch(
-			@RequestParam(value = "text", defaultValue = "") String text,
+	public ResponseEntity<List<Post>> fullSearch(@RequestParam(value = "text", defaultValue = "") String text,
 			@RequestParam(value = "minDate", defaultValue = "") String minDate,
 			@RequestParam(value = "maxDate", defaultValue = "") String maxDate) {
-		
+
 		text = URL.decodeParam(text);
-		Instant min = URL.convertData(minDate, Instant.parse("1900-01-01T00:00:00.000+00:00"));
+		Instant min = URL.convertData(minDate, Instant.parse("1900-01-01T00:00:00.001Z"));
 		Instant max = URL.convertData(maxDate, Instant.now());
-		
+
 		List<Post> posts = postService.fullSearch(text, min, max);
 		return ResponseEntity.ok().body(posts);
 	}

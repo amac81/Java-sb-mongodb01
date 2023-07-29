@@ -22,9 +22,10 @@ public interface PostRepository extends MongoRepository<Post, String> {
 	List<Post> findByTitleContainingIgnoreCase(String text);
 
 	// https://www.mongodb.com/docs/manual/reference/operator/query/regex/
-
-	@Query("{ $and: [ { moment: {$gte: ?1 } }, { moment: {$lte: ?2 } }, 	{ $or: [ { 'title': { $regex: ?0, $options: 'i' } }, { 'body': { $regex: ?0, $options: 'i' } }, , { 'comments.text': { $regex: ?0, $options: 'i' } } ] }\n"
-			+ "] }")
-	List<Post> fullSearch(String text, Instant minMoment, Instant maxMoment);
+	@Query("{ $and: [ {timeStamp: {$gte: ?1}}, {timeStamp: {$lte: ?2}},"
+			+ "{$or: [ { 'title': { $regex: ?0, $options: 'i' } }, " 
+			+ "{ 'body': { $regex: ?0, $options: 'i' } }, "
+			+ "{ 'comments.text': { $regex: ?0, $options: 'i' } } ] }]}")
+	List<Post> fullSearch(String text, Instant minDate, Instant maxDate);
 
 }

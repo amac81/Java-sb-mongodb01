@@ -17,16 +17,11 @@ public class URL {
 	}
 	
 	public static Instant convertData(String textDate, Instant defaultValue) {
-		Instant aux;
 		try {
-			aux = Instant.parse(textDate);
-			return aux;
+			return Instant.parse(textDate);	
 		} 
 		catch(DateTimeParseException e) {
 			return defaultValue;
 		}
-		
-	
 	}
-
 }

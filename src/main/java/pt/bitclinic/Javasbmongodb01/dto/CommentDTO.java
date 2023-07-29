@@ -7,15 +7,15 @@ public class CommentDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String text;
-	private Instant moment;
+	private Instant timeStamp;
 	private AuthorDTO author;
 
 	public CommentDTO() {
 	}
 
-	public CommentDTO(String text, Instant moment, AuthorDTO author) {
+	public CommentDTO(String text, Instant timeStamp, AuthorDTO author) {
 		this.text = text;
-		this.moment = moment;
+		this.timeStamp = timeStamp;
 		this.author = author;
 	}
 	
@@ -27,12 +27,12 @@ public class CommentDTO implements Serializable {
 		this.text = text;
 	}
 
-	public Instant getMoment() {
-		return moment;
+	public Instant getTimeStamp() {
+		return timeStamp;
 	}
 
-	public void setMoment(Instant moment) {
-		this.moment = moment;
+	public void setTimeStamp(Instant timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 
 	public AuthorDTO getAuthor() {

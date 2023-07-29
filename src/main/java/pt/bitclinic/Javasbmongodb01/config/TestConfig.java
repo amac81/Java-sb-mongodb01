@@ -18,6 +18,7 @@ import pt.bitclinic.Javasbmongodb01.repositories.UserRepository;
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner { // to run when program starts
+	
 
 	// Dependence injection
 	@Autowired

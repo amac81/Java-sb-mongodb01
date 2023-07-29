@@ -15,10 +15,10 @@ import pt.bitclinic.Javasbmongodb01.dto.CommentDTO;
 @Document
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	private String id;
-	private Instant moment;
+	private Instant timeStamp;
 	private String title;
 	private String body;
 	private AuthorDTO author;
@@ -28,9 +28,9 @@ public class Post implements Serializable {
 	public Post() {
 	}
 
-	public Post(String id, Instant moment, String title, String body, AuthorDTO author) {
+	public Post(String id, Instant timeStamp, String title, String body, AuthorDTO author) {
 		this.id = id;
-		this.moment = moment;
+		this.timeStamp = timeStamp;
 		this.title = title;
 		this.body = body;
 		this.author = author;
@@ -44,12 +44,12 @@ public class Post implements Serializable {
 		this.id = id;
 	}
 
-	public Instant getMoment() {
-		return moment;
+	public Instant getTimeStamp() {
+		return timeStamp;
 	}
 
-	public void setMoment(Instant moment) {
-		this.moment = moment;
+	public void setTimeStamp(Instant timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 
 	public String getTitle() {
