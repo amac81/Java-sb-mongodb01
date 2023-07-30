@@ -20,6 +20,21 @@ Webservices + NoSQL
 - MongoDB
 - Maven
 
+# How to run the project
+
+## Back end
+Prerequisites: Java 17
+
+```bash
+# clone repository
+git clone https://github.com/amac81/Java-sb-mongodb01.git
+
+# run the project
+./mvnw spring-boot:run (Linux, OSX, Solaris)
+
+mvnw.cmd spring-boot:run (Windows)
+```
+
 # Author
 
 Arnaldo Manuel de Almeida Canelas
