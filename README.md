@@ -46,6 +46,64 @@ git clone https://github.com/amac81/Java-sb-mongodb01.git
 mvnw.cmd spring-boot:run (Windows)
 ```
 
+# How to test the project
+
+Prerequisites: 
+  - Postman or Internet Browser;
+
+### Endpoint for users
+
+```bash
+
+Examples:
+
+# GET users
+http://localhost:8080/users
+
+# GET user by Id
+http://localhost:8080/users/64c6814528bec95b5b18d0f2
+
+# GET posts from user Id
+http://localhost:8080/users/64c6814528bec95b5b18d0f2/posts
+
+# POST user
+http://localhost:8080/users
+body:
+{
+    "name": "Billy Saint",
+    "email": "billy@mail.com"    
+}
+
+# DELETE user (by Id)
+http://localhost:8080/64c6814528bec95b5b18d0f2
+
+# PUT user (update user by Id info)
+http://localhost:8080/users
+body:
+{
+    "name": "new name",
+    "email": "new email"    
+}
+
+```
+
+### Endpoint for posts
+
+```bash
+
+Examples:
+
+# GET post by Id
+http://localhost:8080/posts/64c6814528bec95b5b18d0f9
+
+# GET posts containing certain text in the title
+http://localhost:8080/posts/titlesearch?text=the%20Future
+
+# GET posts and comments containing certain text in the title or body and between dates
+http://localhost:8080/posts/fullsearch?text=body&minDate=2023-07-23T00:00:00.000Z&maxDate=2023-07-25T23:59:00.000Z
+
+```
+
 # Author
 
 Arnaldo Manuel de Almeida Canelas
