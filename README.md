@@ -26,6 +26,9 @@ Java-sb-mongodb01 is educational Project developed in the course Java COMPLETO 2
 - MongoDB
 - Maven
 
+# Patterns used
+- Layers pattern
+
 # How to run the project
 
 ## Back end
