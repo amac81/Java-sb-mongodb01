@@ -4,7 +4,7 @@
 
 # About the project
 
-Java-sb-mongodb01 is educational Project developed in the course Java COMPLETO 2023 Object Oriented Programming +Projects.
+Java-sb-mongodb01 is a Project developed in the course Java COMPLETO 2023 Object Oriented Programming +Projects.
 
 ##  Its objectives:
 
