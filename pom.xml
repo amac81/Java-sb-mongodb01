@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>pt.bitclinic</groupId>
 	<artifactId>Java-sb-mongodb01</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Java-sb-mongodb01</name>
 	<description>Java Spring Boot Project with Mongodb</description>
 	<properties>
