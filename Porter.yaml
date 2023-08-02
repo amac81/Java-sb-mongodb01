@@ -1,0 +1,35 @@
+# porter.yaml
+name: java-sb-mongodb01-app
+version: 1.0.0
+description: My Maven Java Spring Boot app deployed with Porter
+maintainers:
+  - name: Arnaldo Canelas
+    email: arnaldocanelas@gmail.com
+tags:
+  - java
+  - spring-boot
+  - maven
+  - webapp
+
+install:
+  - docker:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      push:
+        image: $REGISTRY_URL/java-sb-mongodb01-app:${{ bundle.version }}
+  - k8s:
+      apply:
+        files:
+          - ./k8s/deployment.yaml
+          - ./k8s/service.yaml
+
+uninstall:
+  - k8s:
+      delete:
+        files:
+          - ./k8s/deployment.yaml
+          - ./k8s/service.yaml
+  - docker:
+      delete:
+        image: $REGISTRY_URL/java-sb-mongodb01-app:${{ bundle.version }}
